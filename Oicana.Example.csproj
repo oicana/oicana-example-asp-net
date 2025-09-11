@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <ServerGarbageCollection>false</ServerGarbageCollection>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- 
+            Uncomment below to use the local Oicana integration.
+            This requires you to check out oicana next to this example repository.
+         -->
+        <!-- <DefineConstants>$(DefineConstants);USE_LOCAL_OICANA</DefineConstants>-->
+    </PropertyGroup>
+
+    <Choose>
+        <When Condition="$(DefineConstants.Contains('USE_LOCAL_OICANA'))">
+            <ItemGroup>
+                <ProjectReference Include="..\oicana\integrations\csharp\Oicana\Oicana.csproj" />
+            </ItemGroup>
+        </When>
+        <Otherwise>
+            <ItemGroup>
+                <PackageReference Include="Oicana" Version="0.1.0-alpha.3" />
+            </ItemGroup>
+        </Otherwise>
+    </Choose>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    </ItemGroup>
+
+</Project>
