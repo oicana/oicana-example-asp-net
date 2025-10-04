@@ -18,7 +18,7 @@ public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, IT
     /// <summary>
     /// Compile a template with given input
     /// </summary>
-    /// <param name="template" example="test"></param>
+    /// <param name="template" example="table"></param>
     /// <param name="request"></param>
     /// <returns>The compiled PDF document</returns>
     [HttpPost("{template}/compile")]
@@ -52,7 +52,7 @@ public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, IT
     /// <summary>
     /// Compile a template with given input
     /// </summary>
-    /// <param name="template" example="test"></param>
+    /// <param name="template" example="table"></param>
     /// <param name="request"></param>
     /// <returns>The compiled document as a png file</returns>
     [HttpPost("{template}/preview")]
@@ -87,7 +87,7 @@ public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, IT
     /// <summary>
     /// Reset the cache for the given template
     /// </summary>
-    /// <param name="template" example="test"></param>
+    /// <param name="template" example="table"></param>
     [HttpPost("{template}/reset")]
     public IActionResult ResetTemplate([FromRoute] String template)
     {
@@ -105,8 +105,8 @@ public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, IT
 ///         {
 ///             "key": "input",
 ///             "value": {
-///                "test": "from sample data",
-///                "items": [
+///                "description": "from sample data",
+///                "rows": [
 ///                    {
 ///                        "name": "Frank",
 ///                        "one": "first",
@@ -135,8 +135,8 @@ public class CompilePdfRequest
     ///     {
     ///         "key": "data",
     ///         "value": {
-    ///            "test": "from sample data",
-    ///            "items": [
+    ///            "description": "from sample data",
+    ///            "rows": [
     ///                {
     ///                    "name": "Frank",
     ///                    "one": "first",

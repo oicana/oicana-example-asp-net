@@ -35,8 +35,8 @@ builder
     .RegisterTemplate("invoice", TemplateVersion.From(0, 1, 0))
     .RegisterTemplate("invoice_zugferd", TemplateVersion.From(0, 1, 0))
     .RegisterTemplate("minimal", TemplateVersion.From(0, 1, 0))
-    .RegisterTemplate("test", TemplateVersion.From(0, 1, 0))
-    .RegisterTemplate("test_multi_input", TemplateVersion.From(0, 1, 0));
+    .RegisterTemplate("table", TemplateVersion.From(0, 1, 0))
+    .RegisterTemplate("multi_input", TemplateVersion.From(0, 1, 0));
 
 var app = builder.Build();
 
