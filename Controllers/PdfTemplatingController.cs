@@ -94,6 +94,40 @@ public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, IT
         var success = templatingService.RemoveTemplate(template);
         return success ? StatusCode(204) : StatusCode(404);
     }
+
+    /// <summary>
+    /// Get a list of all template IDs known to the service
+    /// </summary>
+    /// <returns>Array of template identifiers</returns>
+    [HttpGet]
+    public IActionResult GetTemplates()
+    {
+        var templateIds = TemplateRegistry.Registry.Keys.ToList();
+        return Ok(templateIds);
+    }
+
+    /// <summary>
+    /// Download a packed template file
+    /// </summary>
+    /// <param name="template" example="table">The template identifier</param>
+    /// <returns>The packed template as a .zip file</returns>
+    [HttpGet("{template}")]
+    public IActionResult DownloadTemplate([FromRoute] String template)
+    {
+        if (!TemplateRegistry.Registry.TryGetValue(template, out var version))
+        {
+            return NotFound($"Template '{template}' not found");
+        }
+
+        var filePath = $"templates/{template}-{version}.zip";
+        if (!System.IO.File.Exists(filePath))
+        {
+            return NotFound($"Template file not found: {filePath}");
+        }
+
+        var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+        return File(fileStream, "application/zip", $"{template}.zip");
+    }
 }
 
 /// <summary>
