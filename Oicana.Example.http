@@ -1,4 +1,4 @@
-@OicanaExample_HostAddress = http://localhost:5143
+@OicanaExample_HostAddress = http://localhost:3002
 
 /// Compile the invoice template with example inputs
 POST {{OicanaExample_HostAddress}}/templates/invoice/compile
