@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Oicana.Example.Services;
-using Oicana.Inputs;
 using System.Text.RegularExpressions;
+using Oicana.Example.Models;
 
 namespace Oicana.Example.Controllers;
 
@@ -16,7 +16,7 @@ namespace Oicana.Example.Controllers;
 public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, ITemplatingService templatingService) : ControllerBase
 {
     /// <summary>
-    /// Compile a template with given input
+    /// Compile any example template to PDF with given inputs
     /// </summary>
     /// <param name="template" example="table"></param>
     /// <param name="request"></param>
@@ -49,8 +49,9 @@ public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, IT
             return StatusCode(400);
         }
     }
+
     /// <summary>
-    /// Compile a template with given input
+    /// Compile any example template to PNG with given inputs
     /// </summary>
     /// <param name="template" example="table"></param>
     /// <param name="request"></param>
@@ -128,94 +129,4 @@ public class PdfTemplatingController(ILogger<PdfTemplatingController> logger, IT
         var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
         return File(fileStream, "application/zip", $"{template}.zip");
     }
-}
-
-/// <summary>
-/// Request to compile a template with given input
-/// </summary>
-/// <example>
-/// {
-///    "input": [
-///         {
-///             "key": "input",
-///             "value": {
-///                "description": "from sample data",
-///                "rows": [
-///                    {
-///                        "name": "Frank",
-///                        "one": "first",
-///                        "two": "second",
-///                        "three": "third"
-///                    },
-///                    {
-///                        "name": "John",
-///                        "one": "first_john",
-///                        "two": "second_john",
-///                        "three": "third_john"
-///                    }
-///                ]
-///             }
-///         }
-///     ]
-/// }
-/// </example>
-public class CompilePdfRequest
-{
-    /// <summary>
-    /// Input json to compile the template with
-    /// </summary>
-    /// <example>
-    /// [
-    ///     {
-    ///         "key": "data",
-    ///         "value": {
-    ///            "description": "from sample data",
-    ///            "rows": [
-    ///                {
-    ///                    "name": "Frank",
-    ///                    "one": "first",
-    ///                    "two": "second",
-    ///                    "three": "third"
-    ///                },
-    ///                {
-    ///                    "name": "John",
-    ///                    "one": "first_john",
-    ///                    "two": "second_john",
-    ///                    "three": "third_john"
-    ///                }
-    ///            ]
-    ///         }
-    ///     }
-    /// ]
-    /// </example>
-    public required IList<TemplateJsonInput> JsonInputs { get; init; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <example>
-    /// [
-    ///     {
-    ///         "key": "logo",
-    ///         "blobId": "00000000-0000-0000-0000-000000000000"
-    ///     }
-    /// ]
-    /// </example>
-    public required IList<StoredBlobInput> BlobInputs { get; init; }
-}
-
-/// <summary>
-/// Pass a blob stored in the service as a blob input to the template
-/// </summary>
-public class StoredBlobInput
-{
-    /// <summary>
-    /// The key of the blob input
-    /// </summary>
-    public required string Key { get; init; }
-
-    /// <summary>
-    /// Identifier of the blob file
-    /// </summary>
-    public required Guid BlobId { get; init; }
 }

@@ -1,5 +1,5 @@
 using Oicana.Config;
-using Oicana.Example.Controllers;
+using Oicana.Example.Models;
 using Oicana.Inputs;
 using Oicana.Template;
 

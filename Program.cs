@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddSingleton<IOicanaService, OicanaService>();
 builder.Services.AddScoped<ITemplatingService, TemplatingService>()
+    .AddScoped<ICertificateService, CertificateService>()
     .AddScoped<IStoredBlobService, StoredBlobService>();
 builder.Services.AddCors(options =>
 {

@@ -1,4 +1,5 @@
 using Oicana.Example.Controllers;
+using Oicana.Example.Models;
 using Oicana.Inputs;
 
 namespace Oicana.Example.Services;
