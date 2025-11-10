@@ -33,7 +33,7 @@ public class CertificateService(IOicanaService oicanaService, ILogger<Certificat
             // We can use `TemplateJsonInput.From` here, because `CreateCertificate` serializes into a valid value for the certificate input
             // In a production system you most likely want separate types as API Model and for the input representation
             var input = TemplateJsonInput.From("certificate", request, new JsonSerializerOptions(JsonSerializerDefaults.Web));
-            var result = await Task.Run<Stream?>(() => template.Compile([input], [], CompilationOptions.Pdf()));
+            var result = await Task.Run<Stream?>(() => template.Compile([input], [], new CompilationOptions(CompilationMode.Production), ExportOptions.Pdf()));
             watch.Stop();
 
             logger.LogInformation("Certificate generated in {ElapsedMilliseconds}ms", watch.ElapsedMilliseconds);
