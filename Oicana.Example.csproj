@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <!-- 
+        <!--
             Uncomment below to use the local Oicana integration.
             This requires you to check out oicana next to this example repository.
          -->
@@ -24,7 +24,7 @@
         </When>
         <Otherwise>
             <ItemGroup>
-                <PackageReference Include="Oicana" Version="0.1.0-alpha.5" />
+                <PackageReference Include="Oicana" Version="0.1.0-alpha.6" />
             </ItemGroup>
         </Otherwise>
     </Choose>
