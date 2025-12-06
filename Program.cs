@@ -30,6 +30,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddHostedService<WarmUpTemplates>();
 
 builder
+    .RegisterTemplate("accessibility", TemplateVersion.From(0, 1, 0))
     .RegisterTemplate("certificate", TemplateVersion.From(0, 1, 0))
     .RegisterTemplate("dependency", TemplateVersion.From(0, 1, 0))
     .RegisterTemplate("fonts", TemplateVersion.From(0, 1, 0))
